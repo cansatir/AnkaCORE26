@@ -14,62 +14,62 @@ Bu proje, bir kütüphanenin temel işlemlerini yöneten bir backend sistemi ola
 
 #### 2.1. Veritabanı Tasarımı
 
-Aşağıdaki tabloları PostgreSQL üzerinde oluşturun:
+Aşağıdaki tabloları Entity modelleri kullanarak PostgreSQL üzerinde oluşturun:
 
 **1. `authors` (Yazarlar)**
 | Kolon | Tip | Açıklama |
 |-------|-----|----------|
-| id | BIGINT (PK) | Otomatik artan |
-| name | VARCHAR(100) | NOT NULL |
-| surname | VARCHAR(100) | NOT NULL |
-| birth_date | DATE | |
-| nationality | VARCHAR(50) | |
-| created_at | TIMESTAMP | Varsayılan CURRENT_TIMESTAMP |
-| updated_at | TIMESTAMP | |
+| id | Long | Otomatik artan |
+| name | String(100) | NOT NULL |
+| surname | String(100) | NOT NULL |
+| birth_date | LocalDate | |
+| nationality | String(50) | |
+| created_at | LocalDateTime | |
+| updated_at | LocalDateTime | |
 
 **2. `categories` (Kategoriler)**
 | Kolon | Tip | Açıklama |
 |-------|-----|----------|
-| id | BIGINT (PK) | Otomatik artan |
-| name | VARCHAR(50) | NOT NULL, UNIQUE |
-| description | VARCHAR(255) | |
+| id | Long | Otomatik artan |
+| name | String(50) | NOT NULL, UNIQUE |
+| description | String(255) | |
 
 **3. `books` (Kitaplar)**
 | Kolon | Tip | Açıklama |
 |-------|-----|----------|
-| id | BIGINT (PK) | Otomatik artan |
-| title | VARCHAR(200) | NOT NULL |
-| isbn | VARCHAR(13) | NOT NULL, UNIQUE |
-| publication_year | INTEGER | |
-| total_copies | INTEGER | NOT NULL, varsayılan 1 |
-| available_copies | INTEGER | NOT NULL |
-| author_id | BIGINT (FK) | authors(id) |
-| category_id | BIGINT (FK) | categories(id) |
-| created_at | TIMESTAMP | |
-| updated_at | TIMESTAMP | |
+| id | Long (PK) | Otomatik artan |
+| title | String(200) | NOT NULL |
+| isbn | String(13) | NOT NULL, UNIQUE |
+| publication_year | Integer | |
+| total_copies | Integer | NOT NULL, varsayılan 1 |
+| available_copies | Integer | NOT NULL |
+| author_id | Long (FK) | authors(id) |
+| category_id | Long (FK) | categories(id) |
+| created_at | LocalDateTime | |
+| updated_at | LocalDateTime | |
 
 **4. `users` (Kullanıcılar)**
 | Kolon | Tip | Açıklama |
 |-------|-----|----------|
-| id | BIGINT (PK) | Otomatik artan |
-| email | VARCHAR(100) | NOT NULL, UNIQUE |
-| first_name | VARCHAR(50) | NOT NULL |
-| last_name | VARCHAR(50) | NOT NULL |
-| phone | VARCHAR(20) | |
-| membership_date | DATE | NOT NULL |
-| is_active | BOOLEAN | Varsayılan true |
+| id | Long (PK) | Otomatik artan |
+| email | String(100) | NOT NULL, UNIQUE |
+| first_name | String(50) | NOT NULL |
+| last_name | String(50) | NOT NULL |
+| phone | String(20) | |
+| membership_date | LocalDate | NOT NULL |
+| is_active | Boolean | Varsayılan true |
 
 **5. `borrowings` (Ödünç Alma İşlemleri)**
 | Kolon | Tip | Açıklama |
 |-------|-----|----------|
-| id | BIGINT (PK) | Otomatik artan |
-| user_id | BIGINT (FK) | users(id) |
-| book_id | BIGINT (FK) | books(id) |
-| borrow_date | DATE | NOT NULL |
-| due_date | DATE | NOT NULL |
-| return_date | DATE | |
-| status | VARCHAR(20) | BORROWED, RETURNED, OVERDUE |
-| created_at | TIMESTAMP | |
+| id | Long (PK) | Otomatik artan |
+| user_id | Long (FK) | users(id) |
+| book_id | Long (FK) | books(id) |
+| borrow_date | LocalDate | NOT NULL |
+| due_date | LocalDate | NOT NULL |
+| return_date | LocalDate | |
+| status | String(20) | BORROWED, RETURNED, OVERDUE |
+| created_at | LocalDateTime | |
 
 ---
 
